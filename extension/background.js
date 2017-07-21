@@ -22,7 +22,7 @@ chrome.browserAction.onClicked.addListener((tab) => {
       }
 
       let opening = 'An error occured while trying to open MPV.\nThe error has been logged in the console.\n\n'
-      console.log(error.stderr.length > 0 ? error.stderr : error.stdout)
+      console.log(error.stdout)
 
       switch (error.code){
         default:
