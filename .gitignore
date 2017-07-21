@@ -4,5 +4,6 @@ native/dist/
 
 *.crx
 *.pem
+*.zip
 .DS_Store
 ._*
