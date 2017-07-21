@@ -1,0 +1,13 @@
+{
+  "name": "watch-with-mpv-native",
+  "version": "1.0.0",
+  "author": "Jesse Bryan <jesse@winneon.moe>",
+  "devDependencies": {
+    "archiver": "^2.0.0",
+    "chrome-native-messaging": "^0.2.0",
+    "pkg": "^4.1.2"
+  },
+  "scripts": {
+    "build": "pkg -t latest-win-x64 --out-path build native.js && node zip"
+  }
+}

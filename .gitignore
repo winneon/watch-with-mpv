@@ -1,0 +1,6 @@
+native/node_modules/
+native/build/native.exe
+native/dist/
+
+.DS_Store
+._*

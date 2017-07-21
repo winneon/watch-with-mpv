@@ -1,0 +1,7 @@
+{
+  "name": "moe.winneon.watchwithmpv",
+  "description": "Native host for the Watch with MPV Chrome extension.",
+  "path": "native.exe",
+  "type": "stdio",
+  "allowed_origins": [ "chrome-extension://" ]
+}
