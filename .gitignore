@@ -2,5 +2,7 @@ native/node_modules/
 native/build/native.exe
 native/dist/
 
+*.crx
+*.pem
 .DS_Store
 ._*
