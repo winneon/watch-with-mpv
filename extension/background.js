@@ -1,6 +1,7 @@
 'use strict'
 
 let port = chrome.runtime.connectNative('moe.winneon.watchwithmpv')
+let errShowing = false
 
 port.onMessage.addListener((error) => {
   errorShowing = true

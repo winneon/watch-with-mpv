@@ -1,6 +1,6 @@
 {
   "name": "watch-with-mpv-native",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Jesse Bryan <jesse@winneon.moe>",
   "devDependencies": {
     "archiver": "^2.0.0",
