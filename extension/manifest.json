@@ -3,6 +3,9 @@
   "name": "Watch with MPV",
   "description": "Open the current web stream with MPV.",
   "version": "1.0.0",
+  "icons": {
+    "128": "icons/mpv.png"
+  },
   "browser_action": {
     "default_icon": "icons/mpv.png"
   },
