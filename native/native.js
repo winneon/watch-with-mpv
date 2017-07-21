@@ -7,7 +7,7 @@ process.stdin
   .pipe(new native.Input())
   .pipe(new native.Transform((message, push, done) => {
     try {
-      execSync(`mpv ${message}`, { encoding: 'utf8'})
+      execSync(`mpv ${message.text}`, { encoding: 'utf8'})
     } catch (error){
       let stderr = error.stderr
       let stdout = error.stdout
