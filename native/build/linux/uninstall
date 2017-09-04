@@ -4,5 +4,5 @@ chrome_config_path="/etc/opt/chrome/native-messaging-hosts/"
 
 if [[ -d "$chrome_config_path" ]]; then
     rm -f "$chrome_config_path/moe.winneon.watchwithmpv.json"
-    rm -f "$chrome_config_path/watch-with-mpv-native-linux"
+    rm -f "/usr/bin/watch-with-mpv-native-linux"
 fi
