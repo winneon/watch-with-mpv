@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+chrome_config_path="/etc/opt/chrome/native-messaging-hosts/"
+
+if [[ ! -d "$chrome_config_path" ]]; then
+    mkdir -p "$chrome_config_path"
+fi
+
+pushd $(dirname ${BASH_SOURCE[0]}) &> /dev/null
+absolute="$PWD"
+popd &> /dev/null
+
+cp "$absolute/moe.winneon.watchwithmpv.json" "$chrome_config_path"
+install -D "$absolute/watch-with-mpv-native-linux" "/usr/bin"

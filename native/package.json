@@ -1,13 +1,26 @@
 {
   "name": "watch-with-mpv-native",
-  "version": "1.1.0",
+  "description": "The native host for the Watch with MPV Chrome extension.",
   "author": "Jesse Bryan <jesse@winneon.moe>",
+  "version": "1.1.0",
+  "license": "MIT",
+  "repository": "winneon/watch-with-mpv",
+  "bin": {
+    "native": "native.js"
+  },
+  "pkg": {
+    "targets": [
+      "latest-linux-x64",
+      "latest-win-x64"
+    ],
+    "name": "native"
+  },
+  "scripts": {
+    "build": "pkg --out-path build . && node zip"
+  },
   "devDependencies": {
     "archiver": "^2.0.0",
     "chrome-native-messaging": "^0.2.0",
     "pkg": "^4.1.2"
-  },
-  "scripts": {
-    "build": "pkg -t latest-win-x64 --out-path build native.js && node zip"
   }
 }
