@@ -4,8 +4,10 @@ Watch with MPV is a Chrome extension that allows you to open your current tab in
 
 ## Prerequisites
 
-* `mpv` installed into your system's `PATH`
-* Nothing else at the moment.
+The below prerequisites are required to be in your system's `PATH` environment variable.
+
+* `mpv`
+* `yoututube-dl`
 
 ## Installation
 
