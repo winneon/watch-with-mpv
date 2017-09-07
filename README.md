@@ -11,14 +11,25 @@ Watch with MPV is a Chrome extension that allows you to open your current tab in
 
 This Chrome extension makes use of a native host in order to work properly. This is because of Chrome's extension restrictions. Without the native host, the extension is unable to run MPV from the browser instance.
 
-If you've already installed the Chrome extension from the webstore, skip the first step.
+Be sure you have the [Chrome extension](https://chrome.google.com/webstore/detail/gbgfakmgjoejbcffelendicfedkegllf) installed before you continue.
 
-1. Download and install the [Chrome extension](https://chrome.google.com/webstore/detail/gbgfakmgjoejbcffelendicfedkegllf) from the webstore.
-2. Download the latest release of the native host from the [releases page](https://github.com/winneon/watch-with-mpv/releases/latest). It should be called `native.zip`.
-3. Unzip the downloaded archive into a folder of your choice.
-4. Run `install.bat` as administrator.
+### Windows
 
-**Do not remove the extracted folder after you have followed these steps.** If you wish to move or uninstall the native host, run `uninstall.bat` first. Then you may do as you like with the folder.
+1. Download the [latest Windows release](https://github.com/winneon/watch-with-mpv/releases/v1,1,1).
+2. Unzip the archive into the directory of your choice.
+3. Run `install.bat` as administrator.
+
+**Do not remove the extracted directory after you have followed these steps.** If you wish to move or uninstall the native host, run `uninstall.bat` first. Then you may do as you like with the directory.
+
+### Linux
+
+Run the following commands in the terminal of your choice. **Requires Google Chrome, curl, and unzip to be installed.**
+
+```
+$ curl -L -O https://github.com/winneon/watch-with-mpv/releases/download/v1.1.1/native-linux.zip
+$ unzip native-linux.zip -d native-linux && cd native-linux
+$ sudo ./install
+```
 
 ## Usage
 
