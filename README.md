@@ -15,7 +15,7 @@ Be sure you have the [Chrome extension](https://chrome.google.com/webstore/detai
 
 ### Windows
 
-1. Download the [latest Windows release](https://github.com/winneon/watch-with-mpv/releases/v1.1.1).
+1. Download the [latest Windows release](https://github.com/winneon/watch-with-mpv/releases/download/v1.1.1/native-windows.zip).
 2. Unzip the archive into the directory of your choice.
 3. Run `install.bat` as administrator.
 
