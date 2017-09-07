@@ -7,6 +7,9 @@ chrome.browserAction.onClicked.addListener((tab) => {
     errorShowing = true
     let runtimeError = chrome.runtime.lastError
 
+    console.log(runtimeError)
+    console.log(error)
+
     chrome.browserAction.setIcon({ path: 'icons/error.png' }, () => {
       if (runtimeError && runtimeError.message === "Specified native messaging host not found."){
         console.log(runtimeError.message)
