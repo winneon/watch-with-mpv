@@ -2,13 +2,12 @@
 
 let errorShowing = false
 
-chrome.browserAction.onClicked.addListener((tab) => {
-  chrome.runtime.sendNativeMessage('moe.winneon.watchwithmpv', { text: tab.url }, (error) => {
+function runNative(url){
+  chrome.runtime.sendNativeMessage('moe.winneon.watchwithmpv', { text: url }, (error) => {
     errorShowing = true
     let runtimeError = chrome.runtime.lastError
 
     console.log(runtimeError)
-    console.log(error)
 
     chrome.browserAction.setIcon({ path: 'icons/error.png' }, () => {
       if (runtimeError && runtimeError.message === "Specified native messaging host not found."){
@@ -56,4 +55,16 @@ chrome.browserAction.onClicked.addListener((tab) => {
       }
     }, 1000)
   })
+}
+
+chrome.contextMenus.create({
+  title: 'Watch with MPV',
+  contexts: [ 'link' ],
+  onclick: (info, tab) => runNative(info.linkUrl)
+}, (error) => {
+  if (chrome.runtime.lastError){
+    console.log((chrome.runtime.lastError))
+  }
 })
+
+chrome.browserAction.onClicked.addListener(tab => runNative(tab.url))

@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Watch with MPV",
   "description": "Open the current web stream with MPV.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "icons": {
     "128": "icons/mpv.png"
   },
@@ -13,6 +13,8 @@
     "scripts": [ "background.js" ]
   },
   "permissions": [
-    "nativeMessaging", "activeTab"
+    "nativeMessaging",
+    "activeTab",
+    "contextMenus"
   ]
 }
