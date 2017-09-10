@@ -1,13 +1,13 @@
 native/node_modules/
 native/dist/
 
-native/build/watch-with-mpv-native-linux
-native/build/watch-with-mpv-native-win.exe
-native/build/linux/moe.winneon.watchwithmpv.json
-native/build/win/moe.winneon.watchwithmpv.json
+native/build/**/watch-with-mpv-native-*
+native/build/**/moe.winneon.watchwithmpv.json
+!native/build/moe.winneon.watchwithmpv.json
 
 *.crx
 *.pem
-*.zip
+*.zipa
+
 .DS_Store
 ._*

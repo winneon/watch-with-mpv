@@ -15,6 +15,8 @@
   "permissions": [
     "nativeMessaging",
     "activeTab",
-    "contextMenus"
+    "contextMenus",
+    "cookies",
+    "*://*/*"
   ]
 }

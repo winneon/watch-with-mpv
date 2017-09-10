@@ -16,11 +16,13 @@
     "name": "native"
   },
   "scripts": {
-    "build": "pkg --out-path build . && node zip"
+    "build": "pkg --out-path build .",
+    "postbuild": "node zip"
   },
   "devDependencies": {
     "archiver": "^2.0.0",
     "chrome-native-messaging": "^0.2.0",
+    "node-mpv": "^1.3.1",
     "pkg": "^4.1.2"
   }
 }
