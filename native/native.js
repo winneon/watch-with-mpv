@@ -9,6 +9,13 @@ const fs = require('fs')
 process.stdin
   .pipe(new native.Input())
   .pipe(new native.Transform((message, push, done) => {
+    if (require('./package.json').version !== message.version){
+      push({ error: 'version' })
+      done()
+
+      return
+    }
+
     let directory = path.join(process.platform === 'linux' ? '/tmp' : process.env.TEMP, 'cookies.txt')
     fs.writeFileSync(directory, message.cookies.join('\n'))
 

@@ -7,7 +7,7 @@ native/build/**/moe.winneon.watchwithmpv.json
 
 *.crx
 *.pem
-*.zipa
+*.zip
 
 .DS_Store
 ._*
