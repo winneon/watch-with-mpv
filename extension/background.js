@@ -120,15 +120,15 @@ Afterwards, try again.`)
         } else {
           setIcon('error', () => {
             let bool = confirm(
-  `An error occured while trying to open MPV. The error has
-  been logged in the console.
+`An error occured while trying to open MPV. The error has
+been logged in the console.
 
-  This error is most likely because the URL you specified is
-  not supported by youtube-dl, or you do not have youtube-dl
-  installed.
+This error is most likely because the URL you specified is
+not supported by youtube-dl, or you do not have youtube-dl
+installed.
 
-  Make sure that youtube-dl is installed, and then
-  click OK to view supported URLs. Otherwise, click Cancel.`)
+Make sure that youtube-dl is installed, and then
+click OK to view supported URLs. Otherwise, click Cancel.`)
 
             if (bool){
               chrome.tabs.create({ url: 'https://rg3.github.io/youtube-dl/supportedsites.html' })

@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Watch with MPV",
   "description": "Open the current web stream with MPV.",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "icons": {
     "128": "icons/mpv.png"
   },
