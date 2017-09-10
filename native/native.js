@@ -9,13 +9,6 @@ const fs = require('fs')
 process.stdin
   .pipe(new native.Input())
   .pipe(new native.Transform((message, push, done) => {
-    if (require('./package.json').version !== message.version){
-      push({ error: 'version' })
-      done()
-
-      return
-    }
-
     let directory = path.join(process.platform === 'linux' ? '/tmp' : process.env.TEMP, 'cookies.txt')
     fs.writeFileSync(directory, message.cookies.join('\n'))
 
@@ -34,14 +27,14 @@ process.stdin
         switch (data.event) {
           case 'file-loaded':
             loadedBeforeEnded = true
-            push({ error: 'success' })
+            push({ error: 'success', version: require('./package.json').version })
             done()
 
             break
           case 'end-file':
             if (!loadedBeforeEnded) {
               player.quit()
-              push({ error: 'error' })
+              push({ error: 'error', version: require('./package.json').version })
               done()
             }
 
