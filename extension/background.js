@@ -5,14 +5,15 @@ let interval = undefined
 function setIcon(type, callback) {
   switch (type) {
     case 'mpv':
-      chrome.browserAction.setIcon({ path: 'icons/mpv.png' })
+      chrome.browserAction.setIcon({ path: 'icons/mpv.png' }, () => {
+        chrome.browserAction.setBadgeText({ text: '' })
+        if (callback) callback()
+      })
 
       if (interval) {
         clearInterval(interval)
         interval = undefined
       }
-
-      if (callback) callback()
 
       break
     case 'error':
