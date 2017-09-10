@@ -103,6 +103,8 @@ function runNative(url){
         if (bool){
           chrome.tabs.create({ url: 'https://github.com/winneon/watch-with-mpv/releases/latest' })
         }
+
+        setIcon('mpv')
       } else {
         if (data.error === 'success') {
           setIcon('completed')
