@@ -2,7 +2,7 @@
   "name": "watch-with-mpv-native",
   "description": "The native host for the Watch with MPV Chrome extension.",
   "author": "Jesse Bryan <jesse@winneon.moe>",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "license": "MIT",
   "repository": "winneon/watch-with-mpv",
   "bin": {

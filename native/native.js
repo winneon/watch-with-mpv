@@ -5,6 +5,7 @@ const MPV = require('node-mpv')
 const { spawn } = require('child_process')
 const path = require('path')
 const fs = require('fs')
+const version = require('./package.json').version
 
 process.stdin
   .pipe(new native.Input())
@@ -16,25 +17,46 @@ process.stdin
       debug: false
     }, [
       '--cookies',
-      `--cookies-file=${directory}`,
-      `--ytdl-raw-options=cookies=${directory}`
+      process.platform === 'win32' ? `--cookies-file="${directory}"` : `--cookies-file=${directory}`,
+      process.platform === 'win32' ? `--ytdl-raw-options=cookies=\"${directory}\"` : `--ytdl-raw-options=cookies=${directory}`
     ])
 
     let loadedBeforeEnded = false
+
+    player.mpvPlayer.on('error', err => {
+      console.error(err)
+
+      push({
+        error: err,
+        version: version
+      })
+
+      done()
+    })
 
     player.socket.on('message', data => {
       if (data.event) {
         switch (data.event) {
           case 'file-loaded':
             loadedBeforeEnded = true
-            push({ error: 'success', version: require('./package.json').version })
+
+            push({
+              error: 'success',
+              version: version
+            })
+
             done()
 
             break
           case 'end-file':
             if (!loadedBeforeEnded) {
               player.quit()
-              push({ error: 'error', version: require('./package.json').version })
+
+              push({
+                error: 'error',
+                version: version
+              })
+
               done()
             }
 

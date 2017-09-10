@@ -98,7 +98,10 @@ function runNative(url){
 
       if (runtimeError && runtimeError.message === 'Specified native messaging host not found.'){
         console.log(runtimeError.message)
-        let bool = confirm('Unable to connect to the native host. You may not have it installed.\nClick OK to redirect to the download page.')
+        let bool = confirm(
+`Unable to connect to the native host. You may not have it installed.
+
+Click OK to redirect to the download page.`)
 
         if (bool){
           chrome.tabs.create({ url: 'https://github.com/winneon/watch-with-mpv/releases/latest' })
@@ -109,30 +112,33 @@ function runNative(url){
         if (!data.version || data.version !== chrome.app.getDetails().version) {
           setIcon('error', () => {
             alert(
-`Your extension's version does not match the native host's
-version. Please make sure that this extension and the
-native host are both updated and are the same version.
+`Your extension's version does not match the native host's version. Please make sure that this extension and the native host are both updated and are the same version.
 
 Afterwards, try again.`)
           })
         } else if (data.error === 'success') {
           setIcon('completed')
-        } else {
+        } else if (data.error === 'error'){
           setIcon('error', () => {
             let bool = confirm(
-`An error occured while trying to open MPV. The error has
-been logged in the console.
+`An error occured while trying to open MPV. The error has been logged in the console.
 
-This error is most likely because the URL you specified is
-not supported by youtube-dl, or you do not have youtube-dl
-installed.
+This error is most likely because the URL you specified is not supported by youtube-dl, or you do not have youtube-dl installed.
 
-Make sure that youtube-dl is installed, and then
-click OK to view supported URLs. Otherwise, click Cancel.`)
+Make sure that youtube-dl is installed, and then click OK to view supported URLs. Otherwise, click Cancel.`)
 
             if (bool){
               chrome.tabs.create({ url: 'https://rg3.github.io/youtube-dl/supportedsites.html' })
             }
+          })
+        } else {
+          setIcon('error', () => {
+            alert(
+`An unknown error has occured when opening mpv. The error has been logged into this extension's console.
+
+To view the error, right click on this extension's icon in your toolbar, click 'Manage extensions', and click on 'Inspect views: background page'. The error should be shown in the Console tab of the window that just popped up.
+
+Feel free to report this error if you're unable to resolve the issue yourself. Thank you.`)
           })
         }
       }
@@ -146,7 +152,7 @@ chrome.contextMenus.create({
   onclick: (info, tab) => runNative(info.linkUrl)
 }, (error) => {
   if (chrome.runtime.lastError){
-    console.log((chrome.runtime.lastError))
+    console.log(chrome.runtime.lastError)
   }
 })
 
