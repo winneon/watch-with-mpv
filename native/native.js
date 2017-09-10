@@ -49,9 +49,9 @@ process.stdin
 
             break
           case 'end-file':
-            if (!loadedBeforeEnded) {
-              player.quit()
+            player.quit()
 
+            if (!loadedBeforeEnded) {
               push({
                 error: 'error',
                 version: version
