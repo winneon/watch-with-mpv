@@ -17,7 +17,7 @@ Be sure you have the [Chrome extension](https://chrome.google.com/webstore/detai
 
 ### Windows
 
-1. Download the [latest Windows release](https://github.com/winneon/watch-with-mpv/releases/download/1.2.4/native-windows.zip).
+1. Download the [latest Windows release](https://github.com/winneon/watch-with-mpv/releases/download/1.2.6/native-windows.zip).
 2. Unzip the archive into the directory of your choice.
 3. Run `install.bat` as administrator.
 
@@ -28,7 +28,7 @@ Be sure you have the [Chrome extension](https://chrome.google.com/webstore/detai
 Run the following commands in the terminal of your choice. **Requires Google Chrome, curl, and unzip to be installed.**
 
 ```
-$ curl -L -O https://github.com/winneon/watch-with-mpv/releases/download/1.2.4/native-linux.zip
+$ curl -L -O https://github.com/winneon/watch-with-mpv/releases/download/1.2.6/native-linux.zip
 $ unzip native-linux.zip -d native-linux && cd native-linux
 $ sudo ./install
 ```
