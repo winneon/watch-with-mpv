@@ -109,7 +109,12 @@ Click OK to redirect to the download page.`)
 
         setIcon('mpv')
       } else {
-        if (!data.version || data.version !== chrome.app.getDetails().version) {
+        if (!data) {
+          setIcon('error', () => {
+            alert(
+`The native host has quitted unexpectedly. The reasoning is unknown. If this was not done by you, then feel free to make a GitHub issue describing this error and exactly what you did before this error occured. Thank you.`)
+          })
+        } else if (!data.version || data.version !== chrome.app.getDetails().version) {
           setIcon('error', () => {
             alert(
 `Your extension's version does not match the native host's version. Please make sure that this extension and the native host are both updated and are the same version.
