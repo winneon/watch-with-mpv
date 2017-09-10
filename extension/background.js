@@ -94,14 +94,21 @@ function runNative(url){
       cookies: list
     }, (data) => {
       let runtimeError = chrome.runtime.lastError
-
       console.log(runtimeError)
 
-      if (data.error === 'success') {
-        setIcon('completed')
-      } else if (data.error === 'version') {
-        setIcon('error', () => {
-          alert(
+      if (runtimeError && runtimeError.message === 'Specified native messaging host not found.'){
+        console.log(runtimeError.message)
+        let bool = confirm('Unable to connect to the native host. You may not have it installed.\nClick OK to redirect to the download page.')
+
+        if (bool){
+          chrome.tabs.create({ url: 'https://github.com/winneon/watch-with-mpv/releases/latest' })
+        }
+      } else {
+        if (data.error === 'success') {
+          setIcon('completed')
+        } else if (data.error === 'version') {
+          setIcon('error', () => {
+            alert(
 `Your extension's version does not match the native host's
 version. Please make sure that this extension and the
 native host are both updated and are the same version.
@@ -110,15 +117,7 @@ Afterwards, try again.`)
         })
       } else {
         setIcon('error', () => {
-          if (runtimeError && runtimeError.message === 'Specified native messaging host not found.'){
-            console.log(runtimeError.message)
-            let bool = confirm('Unable to connect to the native host. You may not have it installed.\nClick OK to redirect to the download page.')
-
-            if (bool){
-              chrome.tabs.create({ url: 'https://github.com/winneon/watch-with-mpv/releases/latest' })
-            }
-          } else {
-            let bool = confirm(
+          let bool = confirm(
 `An error occured while trying to open MPV. The error has
 been logged in the console.
 
@@ -132,8 +131,8 @@ click OK to view supported URLs. Otherwise, click Cancel.`)
             if (bool){
               chrome.tabs.create({ url: 'https://rg3.github.io/youtube-dl/supportedsites.html' })
             }
-          }
-        })
+          })
+        }
       }
     })
   })
