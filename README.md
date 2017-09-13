@@ -49,7 +49,7 @@ $ npm install
 
 The extension's source files are located in `extension/`, and the native host's source files are located in `native/`. These two directories are independent of each other.
 
-To load the extension into Chrome, go to `chrome://extensions` and click `Load unpacked extension`. Then select the `native/` directory.
+To load the extension into Chrome, go to `chrome://extensions` and click `Load unpacked extension`. Then select the `extension/` directory.
 
 To install the native host, run the following commands according to your platform. You will need to re-install the native host each time you edit its files.
 
