@@ -36,3 +36,35 @@ $ sudo ./install
 ## Usage
 
 Just click on the MPV icon in the top right Chrome toolbar when you're on a playable webpage. Examples include YouTube, Twitch, Vimeo, a raw video file, even naughty websites! For a full list of supported URLs, visit youtube-dl's [documentation](https://rg3.github.io/youtube-dl/supportedsites.html).
+
+## Contributing
+
+To install the development version, run the following commands. Running the development version **requires** node.js, npm, and git to be installed.
+
+```
+$ git clone https://github.com/winneon/watch-with-mpv
+$ cd watch-with-mpv/native
+$ npm install
+```
+
+The extension's source files are located in `extension/`, and the native host's source files are located in `native/`. These two directories are independent of each other.
+
+To load the extension into Chrome, go to `chrome://extensions` and click `Load unpacked extension`. Then select the `native/` directory.
+
+To install the native host, run the following commands according to your platform. You will need to re-install the native host each time you edit its files.
+
+### Windows
+
+```
+> cd native/build/win
+> npm run build
+> install.bat
+```
+
+### Linux
+
+```
+$ cd native/build/linux
+$ npm run build
+$ sudo ./install
+```
