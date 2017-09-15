@@ -1,13 +1,14 @@
 native/node_modules/
 native/dist/
+native-rust/target/
 
 native/build/**/watch-with-mpv-native-*
 native/build/**/moe.winneon.watchwithmpv.json
 !native/build/moe.winneon.watchwithmpv.json
 
-*.crx
-*.pem
-*.zip
-
-.DS_Store
-._*
+**/*.crx
+**/*.pem
+**/*.zip
+**/*.rs.bk
+**/.DS_Store
+**/._*
