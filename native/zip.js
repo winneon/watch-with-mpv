@@ -39,8 +39,8 @@ fs.writeFileSync(path.join('build', 'linux', jsonName), JSON.stringify(jsonFile,
 jsonFile.path = execWin
 fs.writeFileSync(path.join('build', 'win', jsonName), JSON.stringify(jsonFile, null, 2))
 
-fs.renameSync(path.join('build', execLinux), path.join('build', 'linux', execLinux))
-fs.renameSync(path.join('build', execWin), path.join('build', 'win', execWin))
+fs.renameSync(path.join('target', 'release', 'native-rust'), path.join('build', 'linux', execLinux))
+fs.renameSync(path.join('target', 'x86_64-pc-windows-gnu', 'release', 'native-rust.exe'), path.join('build', 'win', execWin))
 
 let outputLinux = fs.createWriteStream(path.join(__dirname, 'dist', 'native-linux.zip'))
 let outputWin = fs.createWriteStream(path.join(__dirname, 'dist', 'native-windows.zip'))

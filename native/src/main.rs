@@ -17,9 +17,17 @@ use std::path::PathBuf;
 struct Message {
     cookies: String,
     text: String,
+    version: String
 }
 
-fn write_cookies(mut cookies: String) ->  PathBuf {
+#[derive(Serialize, Deserialize)]
+struct ReturnMessage {
+    stdout: String,
+    code: i64,
+    version: String
+}
+
+fn write_cookies(mut cookies: String) -> PathBuf {
     let mut path = PathBuf::new();
 
     path.push(env::temp_dir());
@@ -45,17 +53,36 @@ fn write_cookies(mut cookies: String) ->  PathBuf {
 }
 
 fn get_code_from_line(line: String) -> i64 {
-    return if line.contains("youtube-dl failed") {
-        2
-    } else if line.contains("ERROR: Unsupported URL")
-           || line.contains("No protocol handler found to open URL") {
+    return if
+        line.contains("ERROR: Unsupported URL") ||
+        line.contains("No protocol handler found to open URL") ||
+        line.contains("No such file or directory") {
         1
+    } else if line.contains("youtube-dl failed") {
+        2
     } else {
         0
     };
 }
 
+fn send_return_message(stdout: String, code: i64, exit: i32) {
+    let return_msg = ReturnMessage {
+        stdout: stdout,
+        code: code,
+        version: env!("CARGO_PKG_VERSION").to_string(),
+    };
+
+    match serde_json::to_string(&return_msg) {
+        Ok(json) => println!("{}", json),
+        Err(err) => panic!("Unable to convert json: {}", err)
+    }
+
+    process::exit(exit);
+}
+
 fn main() {
+    let version = env!("CARGO_PKG_VERSION").to_string();
+
     let input = io::stdin();
     let handle = input.lock();
 
@@ -78,10 +105,20 @@ fn main() {
         },
     };
 
+    eprintln!("test");
+
+    if msg.version != version {
+        send_return_message("Outdated version.".to_string(), 3, 0);
+    }
+
     let cookies_path = write_cookies(msg.cookies.clone()).to_string_lossy().into_owned();
 
     let mpv = match Command::new("mpv")
-        .arg("https://www.youtube.com/watch?v=piJpVXnLdJ")
+        .arg("--msg-level=all=info")
+        .arg("--cookies")
+        .arg("--cookies-path=".to_owned() + cookies_path.as_str())
+        .arg("--ytdl-raw-options=cookies=".to_owned() + cookies_path.as_str())
+        .arg(msg.text.clone())
         .stdout(Stdio::piped())
         .spawn() {
         Ok(mpv) => mpv,
@@ -92,11 +129,7 @@ fn main() {
 
     match mpv.stdout.unwrap().read_to_string(&mut line) {
         Ok(_) => {
-            let code = get_code_from_line(line.clone());
-
-            if code > 0 {
-                println!("{}", code);
-            }
+            send_return_message(line.clone(), get_code_from_line(line.clone()), 0);
         },
         Err(err) => panic!("Unable to read mpv stdout: {}", err.description()),
     }

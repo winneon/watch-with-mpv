@@ -72,7 +72,7 @@ function setIcon(type, callback) {
   }
 }
 
-function runNative(url){
+function runNative(url) {
   let split = url.split('/')
 
   chrome.cookies.getAll({
@@ -91,62 +91,72 @@ function runNative(url){
 
     chrome.runtime.sendNativeMessage('moe.winneon.watchwithmpv', {
       text: url,
-      cookies: list
+      cookies: list,
+      version: chrome.app.getDetails().version
     }, (data) => {
       let runtimeError = chrome.runtime.lastError
       console.log(runtimeError)
 
-      if (runtimeError && runtimeError.message === 'Specified native messaging host not found.'){
+      if (runtimeError && runtimeError.message === 'Specified native messaging host not found.') {
         console.log(runtimeError.message)
         let bool = confirm(
 `Unable to connect to the native host. You may not have it installed.
 
 Click OK to redirect to the download page.`)
 
-        if (bool){
+        if (bool) {
           chrome.tabs.create({ url: 'https://github.com/winneon/watch-with-mpv/releases/latest' })
         }
 
         setIcon('mpv')
       } else {
-        if (!data) {
+        if (!data || !data.code) {
           setIcon('error', () => {
             alert(
 `The native host has quit unexpectedly. The reasoning is unknown.
 
 If this was not done by you, then feel free to make a GitHub issue describing this error and exactly what you did before this error occured. Thank you.`)
           })
-        } else if (!data.version || data.version !== chrome.app.getDetails().version) {
-          setIcon('error', () => {
-            alert(
-`Your extension's version does not match the native host's version. Please make sure that this extension and the native host are both updated and are the same version.
-
-Afterwards, try again.`)
-          })
-        } else if (data.error === 'success') {
-          setIcon('completed')
-        } else if (data.error === 'error'){
-          setIcon('error', () => {
-            let bool = confirm(
+        } else {
+          switch (data.code) {
+            case 0:
+              setIcon('completed')
+              break
+            case 1:
+              setIcon('error', () => {
+                let bool = confirm(
 `An error occured while trying to open MPV. The error has been logged in the console.
 
 This error is most likely because the URL you specified is not supported by youtube-dl, or you do not have youtube-dl installed.
 
 Make sure that youtube-dl is installed, and then click OK to view supported URLs. Otherwise, click Cancel.`)
 
-            if (bool){
-              chrome.tabs.create({ url: 'https://rg3.github.io/youtube-dl/supportedsites.html' })
-            }
-          })
-        } else {
-          setIcon('error', () => {
-            alert(
+                if (bool) {
+                  chrome.tabs.create({ url: 'https://rg3.github.io/youtube-dl/supportedsites.html' })
+                }
+              })
+
+              break
+            case 2:
+              setIcon('error', () => {
+                alert(
 `An unknown error has occured when opening mpv. The error has been logged into this extension's console.
 
 To view the error, right click on this extension's icon in your toolbar, click 'Manage extensions', and click on 'Inspect views: background page'. The error should be shown in the Console tab of the window that just popped up.
 
 Feel free to report this error if you're unable to resolve the issue yourself. Thank you.`)
-          })
+              })
+
+              break
+            case 3:
+              setIcon('error', () => {
+                alert(
+`Your extension's version does not match the native host's version. Please make sure that this extension and the native host are both updated and are the same version.
+Afterwards, try again.`)
+              })
+
+              break
+          }
         }
       }
     })
@@ -158,7 +168,7 @@ chrome.contextMenus.create({
   contexts: [ 'link' ],
   onclick: (info, tab) => runNative(info.linkUrl)
 }, (error) => {
-  if (chrome.runtime.lastError){
+  if (chrome.runtime.lastError) {
     console.log(chrome.runtime.lastError)
   }
 })
