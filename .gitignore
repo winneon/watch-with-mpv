@@ -1,6 +1,5 @@
 native/node_modules/
 native/dist/
-native-rust/target/
 
 native/build/**/watch-with-mpv-native-*
 native/build/**/moe.winneon.watchwithmpv.json
