@@ -2,6 +2,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <boost/format.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/process.hpp>
 #include <rapidjson/document.h>
@@ -12,6 +13,7 @@ using namespace std;
 using namespace boost::filesystem;
 using namespace boost::process;
 using namespace rapidjson;
+
 
 path write_cookies_file(vector<string> cookies)
 {
@@ -34,13 +36,16 @@ path write_cookies_file(vector<string> cookies)
     return path ("");
 }
 
-void run_mpv(string url, path tmp_path)
+child run_mpv(string url, path tmp_path)
 {
-    stringstream fmt;
-    fmt << "mpv --msg-level=all=info --cookies --cookies-file=\"" << tmp_path.string() << "\" --ytdl-raw-options=cookies=\"" << tmp_path.string() << "\" \"" << url << "\"";
+    string command = (boost::format("\
+mpv --msg-level=all=info \
+--cookies --cookies-file=\"%s\" \
+--ytdl-raw-options=cookies=\"%s\" \
+\"%s\"") % tmp_path.string() % tmp_path.string() % url).str();
 
     ipstream pipe_stream;
-    child c (fmt.str(), std_out > pipe_stream);
+    child c (command, std_out > pipe_stream);
 
     string line;
 
@@ -49,7 +54,7 @@ void run_mpv(string url, path tmp_path)
         cerr << line << endl;
     }
 
-    c.wait();
+    return c;
 }
 
 int main(int argc, char *argv[])
@@ -75,26 +80,30 @@ int main(int argc, char *argv[])
 
         if (document.Parse(json.c_str()).HasParseError())
         {
-            return 1;
-        }
-
-        Value &array = document["cookies"];
-        vector<string> cookies = { };
-
-        for (SizeType i = 0; i < array.Size(); i++)
-        {
-            cookies.push_back(array[i].GetString());
-        }
-
-        path tmp_path = write_cookies_file(cookies);
-
-        if (!tmp_path.empty())
-        {
-            run_mpv(document["text"].GetString(), tmp_path);
+            cerr << "Unable to parse the provided json." << endl;
         }
         else
         {
-            cerr << "Unable to write cookies file." << endl;
+            Value& array = document["cookies"];
+            vector<string> cookies = { };
+
+            for (SizeType i = 0; i < array.Size(); i++)
+            {
+                cookies.push_back(array[i].GetString());
+            }
+
+            path tmp_path = write_cookies_file(cookies);
+
+            if (!tmp_path.empty())
+            {
+                child c = run_mpv(document["text"].GetString(), tmp_path);
+
+                cerr << "testing!" << endl;
+            }
+            else
+            {
+                cerr << "Unable to write cookies file." << endl;
+            }
         }
     }
 
