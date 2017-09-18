@@ -32,6 +32,7 @@ process.stdin
       })
 
       done()
+      process.exit(1)
     })
 
     player.socket.on('message', data => {
@@ -46,11 +47,10 @@ process.stdin
             })
 
             done()
+            process.exit(0)
 
             break
           case 'end-file':
-            player.quit()
-
             if (!loadedBeforeEnded) {
               push({
                 error: 'error',
@@ -58,7 +58,10 @@ process.stdin
               })
 
               done()
+              process.exit(1)
             }
+
+            process.exit(0)
 
             break
         }
