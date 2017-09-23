@@ -4,10 +4,10 @@ Watch with MPV is a Chrome extension that allows you to open your current tab in
 
 ## Prerequisites
 
-The below prerequisites are required to be in your system's `PATH` environment variable.
+The below prerequisites are required to be in your system's `PATH` environment variable. The version requirements are important if you wish to watch paywalled/private videos.
 
-* `mpv`
-* `youtube-dl`
+* `mpv` >= 0.27.0
+* `youtube-dl` >= 2017.08.06
 
 ## Installation
 
@@ -17,7 +17,7 @@ Be sure you have the [Chrome extension](https://chrome.google.com/webstore/detai
 
 ### Windows
 
-1. Download the [latest Windows release](https://github.com/winneon/watch-with-mpv/releases/download/1.2.7/native-windows.zip).
+1. Download the [latest Windows release](https://github.com/winneon/watch-with-mpv/releases/download/1.2.8/native-windows.zip).
 2. Unzip the archive into the directory of your choice.
 3. Run `install.bat` as administrator.
 
@@ -25,12 +25,21 @@ Be sure you have the [Chrome extension](https://chrome.google.com/webstore/detai
 
 ### Linux
 
-Run the following commands in the terminal of your choice. **Requires Google Chrome, curl, and unzip to be installed.**
+#### Arch Linux
+
+Install **[watch-with-mpv]** or **[watch-with-mpv-git]** from the AUR.
+
+[watch-with-mpv]: https://aur.archlinux.org/packages/watch-with-mpv/
+[watch-with-mpv-git]: https://aur.archlinux.org/packages/watch-with-mpv-git/
+
+#### Other Linux
+
+Run the following commands in the terminal of your choice. **Requires Google Chrome, curl, unzip, and make to be installed.**
 
 ```
-$ curl -L -O https://github.com/winneon/watch-with-mpv/releases/download/1.2.7/native-linux.zip
+$ curl -L -O https://github.com/winneon/watch-with-mpv/releases/download/1.2.8/native-linux.zip
 $ unzip native-linux.zip -d native-linux && cd native-linux
-$ sudo ./install
+$ sudo make install
 ```
 
 ## Usage
