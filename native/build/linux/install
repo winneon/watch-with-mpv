@@ -11,4 +11,4 @@ absolute="$PWD"
 popd &> /dev/null
 
 cp "$absolute/moe.winneon.watchwithmpv.json" "$chrome_config_path"
-install -D "$absolute/install" "$DESTDIR/usr/bin/watch-with-mpv-native-linux"
+install -D "$absolute/watch-with-mpv-native-linux" "$DESTDIR/usr/bin/watch-with-mpv-native-linux"
