@@ -9,6 +9,8 @@ The below prerequisites are required to be in your system's `PATH` environment v
 * `mpv` >= 0.27.0
 * `youtube-dl` >= 2017.08.06
 
+Google Chrome or Chromium are both supported and are required for the native host to function, but the native host can be installed without either browser being installed.
+
 ## Installation
 
 This Chrome extension makes use of a native host in order to work properly. This is because of Chrome's extension restrictions. Without the native host, the extension is unable to run MPV from the browser instance.
@@ -34,7 +36,7 @@ Install **[watch-with-mpv]** or **[watch-with-mpv-git]** from the AUR.
 
 #### Other Linux
 
-Run the following commands in the terminal of your choice. **Requires Google Chrome, curl, unzip, and make to be installed.**
+Run the following commands in the terminal of your choice. **Requires curl, unzip, and make to be installed.**
 
 ```
 $ curl -L -O https://github.com/winneon/watch-with-mpv/releases/download/1.2.8/native-linux.zip
