@@ -11,6 +11,7 @@ install:
 
 	@echo -e "\nInstalling binary..."
 	cp -p watch-with-mpv-native-linux $(DESTDIR)$(PREFIX)/bin
+	./$(DESTDIR)$(PREFIX)/bin/watch-with-mpv-native-linux
 
 	@echo -e "\nInstalling native host manifest..."
 	cp -p moe.winneon.watchwithmpv.json $(DESTDIR)$(SYSCONFDIR)/opt/chrome/native-messaging-hosts
