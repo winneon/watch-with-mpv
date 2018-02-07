@@ -77,5 +77,5 @@ To install the native host, run the following commands according to your platfor
 ```
 $ cd native/build/linux
 $ npm run build
-$ sudo ./install
+$ sudo make install
 ```
