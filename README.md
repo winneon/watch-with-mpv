@@ -19,7 +19,7 @@ Be sure you have the [Chrome extension](https://chrome.google.com/webstore/detai
 
 ### Windows
 
-1. Download the [latest Windows release](https://github.com/winneon/watch-with-mpv/releases/download/1.2.8/native-windows.zip).
+1. Download the [latest Windows release](https://github.com/winneon/watch-with-mpv/releases/download/1.2.9/native-windows.zip).
 2. Unzip the archive into the directory of your choice.
 3. Run `install.bat` as administrator.
 
@@ -39,7 +39,7 @@ Install **[watch-with-mpv]** or **[watch-with-mpv-git]** from the AUR.
 Run the following commands in the terminal of your choice. **Requires curl, unzip, and make to be installed.**
 
 ```
-$ curl -L -O https://github.com/winneon/watch-with-mpv/releases/download/1.2.8/native-linux.zip
+$ curl -L -O https://github.com/winneon/watch-with-mpv/releases/download/1.2.9/native-linux.zip
 $ unzip native-linux.zip -d native-linux && cd native-linux
 $ sudo make install
 ```
