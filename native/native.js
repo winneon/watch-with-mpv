@@ -14,7 +14,8 @@ process.stdin
     fs.writeFileSync(directory, message.cookies.join('\n'))
 
     let player = new MPV({
-      debug: false
+      debug: false,
+      ipc_command: '--input-ipc-server'
     }, [
       '--cookies',
       process.platform === 'win32' ? `--cookies-file="${directory}"` : `--cookies-file=${directory}`,
