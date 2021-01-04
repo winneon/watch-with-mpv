@@ -18,7 +18,7 @@ process.stdin
       ipc_command: '--input-ipc-server'
     }, [
       '--hwdec=auto',
-      ' --cookies',
+      '--cookies',
       process.platform === 'win32' ? `--cookies-file="${directory}"` : `--cookies-file=${directory}`,
       process.platform === 'win32' ? `--ytdl-raw-options=cookies=\"${directory}\"` : `--ytdl-raw-options=cookies=${directory}`
     ])

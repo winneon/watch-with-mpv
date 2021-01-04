@@ -27,14 +27,25 @@ Be sure you have the [Chrome extension](https://chrome.google.com/webstore/detai
 
 ### Linux
 
-#### Arch Linux
+#### Arch Linux - packaged way
 
 Install **[watch-with-mpv]** or **[watch-with-mpv-git]** from the AUR.
 
 [watch-with-mpv]: https://aur.archlinux.org/packages/watch-with-mpv/
 [watch-with-mpv-git]: https://aur.archlinux.org/packages/watch-with-mpv-git/
 
-#### Other Linux
+#### Arch Linux DIY way + Other Linux 
+
+Run the following commands in the terminal of your choice. **Requires `npm` to be installed**
+
+```
+mkdir -p ~/git
+cd ~/git
+git clone https://github.com/kyberdrb/watch-with-mpv.git
+cd watch-with-mpv/ native/build/linux/
+npm run build
+sudo make install
+```
 
 Run the following commands in the terminal of your choice. **Requires curl, unzip, and make to be installed.**
 
