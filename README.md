@@ -43,7 +43,7 @@ Install **[watch-with-mpv]** or **[watch-with-mpv-git]** from the AUR.
 
 Run the following commands in the terminal of your choice. **Requires `git`, `npm` and `make` to be installed**
 
-Install required packages (Arch Linux only)
+Install required packages (The `pacman` package manager utility works only in Arch Linux. If you're using other Linux distribution, use the package manager of the distribution. Also, the packages might have different names in different Linux distributions.)
 
     sudo pacman -Syy git npm make
 
