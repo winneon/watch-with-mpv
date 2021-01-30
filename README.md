@@ -8,6 +8,7 @@ The below prerequisites are required to be in your system's `PATH` environment v
 
 * `mpv` >= 0.27.0
 * `youtube-dl` >= 2017.08.06
+* `npm`
 
 Google Chrome or Chromium are both supported and are required for the native host to function, but the native host can be installed without either browser being installed.
 
@@ -27,16 +28,47 @@ Be sure you have the [Chrome extension](https://chrome.google.com/webstore/detai
 
 ### Linux
 
-#### Arch Linux
+There are multiple was how to install this package. Whatever way you choose, the video forwarding to the MPV player via native client is immediately functional and usable without reloading the site, restarting Chromium or restarting the computer.
+
+#### Installing from a package
+
+This method works, at the time of writing, only in Arch Linux.
 
 Install **[watch-with-mpv]** or **[watch-with-mpv-git]** from the AUR.
 
 [watch-with-mpv]: https://aur.archlinux.org/packages/watch-with-mpv/
 [watch-with-mpv-git]: https://aur.archlinux.org/packages/watch-with-mpv-git/
 
-#### Other Linux
+#### Installing from source
 
-Run the following commands in the terminal of your choice. **Requires curl, unzip, and make to be installed.**
+Run the following commands in the terminal of your choice. **Requires `git`, `npm` and `make` to be installed**
+
+Install required packages (The `pacman` package manager utility works only in Arch Linux. If you're using other Linux distribution, use the package manager of the distribution. Also, the packages might have different names in different Linux distributions.)
+
+    sudo pacman -Syy git npm make
+
+Clone the repository
+
+    mkdir -p ~/git
+    cd ~/git
+    git clone https://github.com/kyberdrb/watch-with-mpv.git
+    cd watch-with-mpv/ native/build/linux/
+
+Install dependencies, i. e. Node.js packages which this project works with
+
+    npm install
+
+Build the binary
+
+    npm run build
+
+Install the compiled binary
+
+    sudo make install
+
+#### Installing from a release
+
+Run the following commands in the terminal of your choice. **Requires `curl`, `unzip`, and `make` to be installed.**
 
 ```
 $ curl -L -O https://github.com/winneon/watch-with-mpv/releases/download/1.2.9/native-linux.zip
